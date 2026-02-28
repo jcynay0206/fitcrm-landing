@@ -8,9 +8,15 @@
 <!-- STRIPE JS -->
 <script src="https://js.stripe.com/v3/"></script>
 
-<!-- PAYPAL SDK  ← reemplaza YOUR_PAYPAL_CLIENT_ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg&currency=USD&intent=capture" data-sdk-integration-source="button-factory" onerror="window.paypalFailed=true"></script>
+<!-- EMAILJS — envío automático de emails post-pago -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+<!-- EMAILJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- PAYPAL SDK  ← https://www.paypal.com/sdk/js?client-id=Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg&currency=USD&intent=capture" data-sdk-integration-source="button-factory" onerror->
+
+<script src="https://www.paypal.com/sdk/js?client-id=Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg&currency=USD&intent=capture" data-sdk-integration-source="button-factory" onerror="window.paypalFailed=true"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
@@ -774,7 +780,7 @@ footer {
       <div class="footer-links">
         <h4>Contacto</h4>
         <ul>
-          <li><a href="#">hola@fitcrm.app</a></li>
+          <li><a href="#"><span class="__cf_email__" data-cfemail="9df5f2f1fcddfbf4e9feeff0b3fceded">[email&#160;protected]</span></a></li>
           <li><a href="#">WhatsApp</a></li>
           <li><a href="#">Instagram</a></li>
         </ul>
@@ -830,8 +836,9 @@ footer {
         <label class="form-label">Email</label>
         <input class="form-input" id="card-email" type="email" placeholder="tu@email.com" />
         <label class="form-label">Datos de tarjeta</label>
-        <div id="stripe-card-element"><!-- Stripe Elements monta aquí --></div>
-        <div id="stripe-error" style="color:#ff4f3b;font-size:13px;margin-bottom:12px;min-height:18px"></div>
+        const STRIPE_PUBLISHABLE_KEY = 'pk_live_51T2KJ2Pr3IiH6PDOxwuWSyi3bSe1qQdgT8E8ObteFHt2CjX6jPPhnI4OKLU7XVUsyM5kzDdXiUSgZTNDk1vBC6EK00j1Yzs7uy';
+// PayPal Client ID se pasa en la URL del SDK arriba (YOUR_PAYPAL_CLIENT_ID)
+          <div id="stripe-error" style="color:#ff4f3b;font-size:13px;margin-bottom:12px;min-height:18px"></div>
         <button class="pm-submit" id="btn-stripe" onclick="handleStripePayment()">
           <span id="stripe-btn-text">🔒 Pagar con Stripe</span>
           <div class="pm-spinner" id="stripe-spinner"></div>
@@ -852,12 +859,36 @@ footer {
 <!-- ══════════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════════ -->
-<script>
-// ─────────────────────────────────────────────
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ═══════════════════════════════════════════════════════════
 // ⚠️  CONFIGURACIÓN — REEMPLAZA CON TUS CLAVES
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+
+// ── Stripe ───────────────────────────────────────────────
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_51T2KJ2Pr3IiH6PDOxwuWSyi3bSe1qQdgT8E8ObteFHt2CjX6jPPhnI4OKLU7XVUsyM5kzDdXiUSgZTNDk1vBC6EK00j1Yzs7uy';
 // PayPal Client ID se pasa en la URL del SDK arriba (YOUR_PAYPAL_CLIENT_ID)
+
+// ── EmailJS — emailjs.com (gratis hasta 200 emails/mes) ──
+// Pasos: 1) Crea cuenta en emailjs.com
+//        2) Conecta tu Gmail en "Email Services"
+//        3) Crea un template en "Email Templates"
+//        4) Copia las 3 claves abajo
+const EMAILJS_PUBLIC_KEY  = 'aQqvTz0v1CIa0cMIz';    // Account → Public Key
+const EMAILJS_SERVICE_ID  = 'service_sswickh';    // Email Services → Service ID
+const EMAILJS_TEMPLATE_ID = 'dgkqr1b';   // Email Templates → Template ID
+
+// ── Links de descarga por plan (Google Drive / Dropbox) ──
+const DOWNLOAD_LINKS = {
+  starter: 'https://drive.google.com/REEMPLAZA-LINK-STARTER',
+  pro:     'https://drive.google.com/REEMPLAZA-LINK-PRO',
+  elite:   'https://drive.google.com/REEMPLAZA-LINK-ELITE'
+};
+
+// ── Tu email para recibir notificación de cada venta ─────
+const OWNER_EMAIL = 'yuny1584@gmail.com';
+
+// Inicializar EmailJS
+try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch(e) { console.warn('EmailJS: agrega tu Public Key'); }
 
 // ─────────────────────────────────────────────
 // STRIPE SETUP
@@ -999,7 +1030,44 @@ async function handleStripePayment() {
   }
 }
 
+// ─────────────────────────────────────────────
+// EMAIL AUTOMÁTICO POST-PAGO (EmailJS)
+// ─────────────────────────────────────────────
+async function sendConfirmationEmail(buyerEmail, buyerName, planId) {
+  const planNames = { starter: 'Starter', pro: 'Pro', elite: 'Elite' };
+  const planPrices = { starter: '$97', pro: '$197', elite: '$397' };
+  const downloadLink = DOWNLOAD_LINKS[planId] || DOWNLOAD_LINKS.pro;
+
+  const templateParams = {
+    // Datos del comprador → van al email de confirmación
+    to_email:     buyerEmail,
+    to_name:      buyerName || 'Coach',
+    plan_name:    planNames[planId] || planId,
+    plan_price:   planPrices[planId] || '',
+    download_url: downloadLink,
+    // Datos para tu notificación de venta
+    owner_email:  OWNER_EMAIL,
+    sale_date:    new Date().toLocaleString('es-MX'),
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    console.log('✅ Email enviado a:', buyerEmail);
+  } catch(err) {
+    console.warn('EmailJS error (configura tus claves):', err);
+  }
+}
+
 function showSuccess() {
+  const buyerEmail = document.getElementById('card-email')?.value || '';
+  const buyerName  = document.getElementById('card-name')?.value  || '';
+  const planId     = Object.keys({starter:'Starter',pro:'Pro',elite:'Elite'})
+    .find(k => 'Plan '+{starter:'Starter',pro:'Pro',elite:'Elite'}[k] ===
+      document.getElementById('pm-plan-name')?.textContent) || 'pro';
+
+  // Disparar email automático
+  sendConfirmationEmail(buyerEmail, buyerName, planId);
+
   document.getElementById('pm-form-area').style.display = 'none';
   document.getElementById('pm-success').style.display = 'block';
 }
@@ -1020,13 +1088,5 @@ document.querySelectorAll('.faq-item').forEach(item => {
 // ─────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fadeUp .6s ease both'; e.target.style.opacity = 1; } });
-}, { threshold: .1 });
 
-document.querySelectorAll('.feat-card, .step-card, .price-card, .testi-card').forEach(el => {
-  el.style.opacity = 0;
-  observer.observe(el);
-});
-</script>
 
-</body>
-</html>
