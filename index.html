@@ -8,8 +8,8 @@
 <!-- STRIPE JS -->
 <script src="https://js.stripe.com/v3/"></script>
 
-<!-- PAYPAL SDK ← <script src="https://www.paypal.com/sdk/js?client-id=Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg&currency=USD&intent=capture" data-sdk-integration-source="button-factory" onerror="window.paypalFailed=true"></script>
-src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture" onerror="window.paypalFailed=true"></script>
+<!-- PAYPAL SDK ← REEMPLAZA Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg con tu Client ID real -->
+<script src="https://www.paypal.com/sdk/js?client-id=Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg&currency=USD&intent=capture" onerror="window.paypalFailed=true"></script>
 
 <!-- EMAILJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -423,8 +423,8 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
 // ═══════════════════════════════════════════════════════════════
 // ⚠️  SOLO CAMBIA ESTAS 2 LÍNEAS
 // ═══════════════════════════════════════════════════════════════
-const STRIPE_PUBLISHABLE_KEY = 'ppk_live_51T2KJ2Pr3IiH6PDOxwuWSyi3bSe1qQdgT8E8ObteFHt2CjX6jPPhnI4OKLU7XVUsyM5kzDdXiUSgZTNDk1vBC6EK00j1Yzs7uy'; // ← tu pk_live_...
-// PayPal: reemplaza YOUR_PAYPAL_CLIENT_ID en la línea del SDK arriba (línea 8)
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51T2KJ2Pr3IiH6PDOxwuWSyi3bSe1qQdgT8E8ObteFHt2CjX6jPPhnI4OKLU7XVUsyM5kzDdXiUSgZTNDk1vBC6EK00j1Yzs7uy'; // ← tu pk_live_...
+// PayPal: reemplaza Acu3Yb61wjW2J20qZyM72Qt7q1jsU3Avd2TxESkr8E5YsWvklxH-UuAB3nRLGsZhqEdkrmc-8ldAQiFg en la línea del SDK arriba (línea 8)
 
 // ── EmailJS — YA CONFIGURADO ✅ ──────────────────────────────
 const EMAILJS_PUBLIC_KEY  = 'aQqvTz0v1CIa0cMIz';
@@ -566,4 +566,3 @@ document.querySelectorAll('.feat-card,.step-card,.price-card,.testi-card').forEa
 </script>
 </body>
 </html>
-
