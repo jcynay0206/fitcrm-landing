@@ -291,7 +291,7 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
 <section class="pricing" id="pricing">
   <div class="section-inner">
     <div class="section-label" style="color:#9999aa">Precios</div>
-    <h2 class="display section-title">Invierte una vez,<br>cobra para siempre</h2>
+    <h2 class="display section-title">Elige cómo quieres<br>trabajar con FitCRM</h2>
     <p class="section-sub" style="color:#9999aa">Mindbody cobra $129/mes + comisiones. FitCRM desde $59/mes sin comisiones extra.</p>
 
     <!-- Tabla comparativa -->
@@ -330,6 +330,7 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
           <li>✅ Soporte mensual incluido</li>
           <li>❌ Sin código fuente</li>
         </ul>
+        <a href="https://myfitcrm.vercel.app/" target="_blank" class="price-btn price-btn-dark" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px">🚀 Ver demo del CRM</a>
         <button class="price-btn price-btn-dark" onclick="window.open('https://buy.stripe.com/3cIaEY6p3f2O2ZwcIz3Je05','_blank')">💳 Suscribir con Stripe</button>
         <button class="price-btn price-btn-dark" style="margin-top:10px" id="btn-paypal-saas">🅿️ Suscribir con PayPal</button>
       </div>
@@ -415,11 +416,11 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
     <div class="section-label">Preguntas frecuentes</div>
     <h2 class="display section-title">¿Tienes dudas?</h2>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">¿Necesito saber programar para instalarlo? <span class="faq-chevron">+</span></div><div class="faq-a">No necesitas conocimientos avanzados. Con el plan Elite incluso lo configuramos por ti. Para los planes Starter y Pro incluimos una guía paso a paso en video.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Necesito saber programar para instalarlo? <span class="faq-chevron">+</span></div><div class="faq-a">Depende del plan. El plan SaaS ($59/mes) no requiere nada — nosotros lo manejamos todo. El plan Código Solo ($397) incluye una guía paso a paso detallada para cualquier sistema. El plan Código + SaaS ($597) nosotros lo instalamos por ti en 24-48 horas.</div></div>
       <div class="faq-item"><div class="faq-q">¿Cobra comisión por mis ventas? <span class="faq-chevron">+</span></div><div class="faq-a">No. El 100% de tus ventas es tuyo. Las únicas comisiones son las de tu pasarela de pago (Stripe, PayPal, MercadoPago, etc.). Nosotros no cobramos nada adicional.</div></div>
       <div class="faq-item"><div class="faq-q">¿Funciona para otros tipos de negocio? <span class="faq-chevron">+</span></div><div class="faq-a">Totalmente. El CRM base funciona para cualquier servicio. Coaches de vida, psicólogos, nutricionistas, academias, estudios de yoga y más ya lo usan.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Qué pasa si necesito ayuda con la instalación? <span class="faq-chevron">+</span></div><div class="faq-a">Todos los planes incluyen soporte vía email. El plan Elite incluye sesión de setup 1:1 por videollamada para dejarlo funcionando desde el primer día.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Puedo usar mi propio dominio? <span class="faq-chevron">+</span></div><div class="faq-a">Sí, puedes conectar cualquier dominio en Vercel de forma gratuita. En el plan Elite lo configuramos nosotros por ti.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Qué pasa si necesito ayuda con la instalación? <span class="faq-chevron">+</span></div><div class="faq-a">El plan SaaS y el plan Código + SaaS incluyen soporte completo. El plan Código Solo incluye soporte por email por 30 días para resolver cualquier duda durante la instalación.</div></div>
+      <div class="faq-item"><div class="faq-q">¿Puedo usar mi propio dominio? <span class="faq-chevron">+</span></div><div class="faq-a">Sí. Con el plan Código Solo puedes conectar tu dominio en Vercel gratis. Con el plan SaaS y Código + SaaS nosotros lo configuramos por ti.</div></div>
     </div>
   </div>
 </section>
@@ -462,7 +463,7 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
     <div class="pm-success" id="pm-success">
       <div class="pm-success-icon">🎉</div>
       <div class="pm-success-title">¡Pago exitoso!</div>
-      <p class="pm-success-sub">Recibirás el código fuente en tu email en los próximos minutos.<br>Revisa tu bandeja de entrada.</p>
+      <p class="pm-success-sub" id="pm-success-msg">Recibirás la información en tu email en los próximos minutos.<br>Revisa tu bandeja de entrada.</p>
     </div>
     <div id="pm-form-area">
       <div class="pm-tabs">
@@ -506,9 +507,9 @@ const OWNER_EMAIL         = 'yuny1584@gmail.com';
 
 // ── Links de descarga — pega tu link de Google Drive ─────────
 const DOWNLOAD_LINKS = {
-  starter: 'https://drive.google.com/file/d/1d6x9_H0TtYpJQRdLHfX8B3iMR3q0c6Mq/view?usp=sharing',
-  pro:     'https://drive.google.com/file/d/1d6x9_H0TtYpJQRdLHfX8B3iMR3q0c6Mq/view?usp=sharing',
-  elite:   'https://drive.google.com/file/d/1d6x9_H0TtYpJQRdLHfX8B3iMR3q0c6Mq/view?usp=sharing'
+  saas:    'https://myfitcrm.vercel.app/',  // SaaS — link al CRM
+  codigo:  'https://drive.google.com/file/d/16Zhh5gV15fR_iZFQIRx6ni3tE0ot59rM/view?usp=sharing',
+  premium: null    // Premium — tú haces la instalación
 };
 // ═══════════════════════════════════════════════════════════════
 
@@ -552,7 +553,7 @@ function initPayPal() {
 }
 
 // Modal
-const planNames  = { starter:'Starter', pro:'Pro', elite:'Elite' };
+const planNames  = { saas:'SaaS Mensual', codigo:'Código Solo', premium:'Código + SaaS', // legacy: starter:'Starter', pro:'Pro', elite:'Elite' };
 const planPrices = { starter:'$97', pro:'$197', elite:'$397' };
 let currentPlan  = { id:'pro', name:'Pro', price:197 };
 
@@ -601,19 +602,46 @@ async function handleStripePayment() {
 // Email automático post-pago
 async function sendConfirmationEmail(buyerEmail, buyerName, planId) {
   if (!buyerEmail) return;
+
+  // Mensaje de éxito personalizado según el plan
+  const successMessages = {
+    saas:    'Tu suscripción está siendo procesada. En menos de 24 horas recibirás tu acceso al CRM por email.',
+    codigo:  'Recibirás el ZIP con el código fuente y la guía de instalación en tu email en los próximos minutos.',
+    premium: 'Hemos recibido tu pago. En 24-48 horas tendrás tu CRM completamente instalado y listo para usar.'
+  };
+  const msg = document.getElementById('pm-success-msg');
+  if (msg) msg.textContent = successMessages[planId] || successMessages.codigo;
+
+  // Email al comprador
   try {
+    const downloadUrl = DOWNLOAD_LINKS[planId];
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email:     buyerEmail,
       email:        buyerEmail,
       to_name:      buyerName || 'Coach',
       plan_name:    planNames[planId]  || planId,
       plan_price:   planPrices[planId] || '',
-      download_url: DOWNLOAD_LINKS[planId] || DOWNLOAD_LINKS.pro,
+      download_url: downloadUrl || 'No aplica para este plan',
       owner_email:  OWNER_EMAIL,
       sale_date:    new Date().toLocaleString('es-MX'),
     });
-    console.log('✅ Email enviado a:', buyerEmail);
-  } catch(err) { console.warn('EmailJS error:', err); }
+    console.log('✅ Email enviado al comprador:', buyerEmail);
+  } catch(err) { console.warn('EmailJS error (comprador):', err); }
+
+  // Notificación a ti (al owner) para que sepas quién compró
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:     OWNER_EMAIL,
+      email:        OWNER_EMAIL,
+      to_name:      'Yunersy',
+      plan_name:    '🔔 NUEVA VENTA — ' + (planNames[planId] || planId),
+      plan_price:   planPrices[planId] || '',
+      download_url: 'Coach: ' + buyerName + ' | Email: ' + buyerEmail,
+      owner_email:  OWNER_EMAIL,
+      sale_date:    new Date().toLocaleString('es-MX'),
+    });
+    console.log('✅ Notificación enviada al owner');
+  } catch(err) { console.warn('EmailJS error (owner):', err); }
 }
 
 function showSuccess() {
