@@ -505,7 +505,7 @@ const EMAILJS_SERVICE_ID  = 'service_sswickh';
 const EMAILJS_TEMPLATE_ID = 'dgkqr1b';
 const OWNER_EMAIL         = 'yuny1584@gmail.com';
 
-// ── Links de descarga — pega tu link de Google Drive ─────────
+// ── https://drive.google.com/file/d/1MYdSG-oSlV-bg-WZnaOXqsGGvU3x4S-3/view?usp=sharing ─────────
 const DOWNLOAD_LINKS = {
   saas:    'https://myfitcrm.vercel.app/',  // SaaS — link al CRM
   codigo:  'https://drive.google.com/file/d/16Zhh5gV15fR_iZFQIRx6ni3tE0ot59rM/view?usp=sharing',
@@ -606,7 +606,7 @@ async function sendConfirmationEmail(buyerEmail, buyerName, planId) {
   // Mensaje de éxito personalizado según el plan
   const successMessages = {
     saas:    'Tu suscripción está siendo procesada. En menos de 24 horas recibirás tu acceso al CRM por email.',
-    codigo:  'Recibirás el ZIP con el código fuente y la guía de instalación en tu email en los próximos minutos.',
+    codigo:  '¡Gracias por tu compra! Recibirás el ZIP con el código y la guía de instalación en tu email en minutos. Si necesitas que lo instalemos por ti, hay una opción de upgrade por $200 al final de la guía.',
     premium: 'Hemos recibido tu pago. En 24-48 horas tendrás tu CRM completamente instalado y listo para usar.'
   };
   const msg = document.getElementById('pm-success-msg');
@@ -622,6 +622,7 @@ async function sendConfirmationEmail(buyerEmail, buyerName, planId) {
       plan_name:    planNames[planId]  || planId,
       plan_price:   planPrices[planId] || '',
       download_url: downloadUrl || 'No aplica para este plan',
+      upsell_msg: planId === 'codigo' ? '¿Prefieres que lo instalemos por ti? Upgrade por $200: https://buy.stripe.com/fZufZieVz3k61VsaAr3Je08' : '',
       owner_email:  OWNER_EMAIL,
       sale_date:    new Date().toLocaleString('es-MX'),
     });
