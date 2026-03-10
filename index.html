@@ -661,4 +661,9 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 // Scroll animations
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fade
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fadeIn ease .6s both'; } });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+});
+</script>
+</body>
+</html>
