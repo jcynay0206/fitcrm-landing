@@ -416,11 +416,11 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
     <div class="section-label">Preguntas frecuentes</div>
     <h2 class="display section-title">¿Tienes dudas?</h2>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">¿Necesito saber programar para instalarlo? <span class="faq-chevron">+</span></div><div class="faq-a">Depende del plan. El plan SaaS ($59/mes) no requiere nada — nosotros lo manejamos todo. El plan Código Solo ($397) incluye una guía paso a paso detallada para cualquier sistema. El plan Código + SaaS ($597) nosotros lo instalamos por ti en 24-48 horas.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Cobra comisión por mis ventas? <span class="faq-chevron">+</span></div><div class="faq-a">No. El 100% de tus ventas es tuyo. Las únicas comisiones son las de tu pasarela de pago (Stripe, PayPal, MercadoPago, etc.). Nosotros no cobramos nada adicional.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Funciona para otros tipos de negocio? <span class="faq-chevron">+</span></div><div class="faq-a">Totalmente. El CRM base funciona para cualquier servicio. Coaches de vida, psicólogos, nutricionistas, academias, estudios de yoga y más ya lo usan.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Qué pasa si necesito ayuda con la instalación? <span class="faq-chevron">+</span></div><div class="faq-a">El plan SaaS y el plan Código + SaaS incluyen soporte completo. El plan Código Solo incluye soporte por email por 30 días para resolver cualquier duda durante la instalación.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Puedo usar mi propio dominio? <span class="faq-chevron">+</span></div><div class="faq-a">Sí. Con el plan Código Solo puedes conectar tu dominio en Vercel gratis. Con el plan SaaS y Código + SaaS nosotros lo configuramos por ti.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Necesito saber programar para instalarlo? <span class="faq-chevron">+</span></div><div class="faq-a">Depende del plan. El plan SaaS ($59/mes) no requiere nada — nosotros lo manejamos todo. El plan Código Solo ($397) incluye una guía paso a paso detallada para cualquier sistema. El plan Código + SaaS ($597) nosotros lo instalamos por ti en 24-48 horas.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cobra comisión por mis ventas? <span class="faq-chevron">+</span></div><div class="faq-a">No. El 100% de tus ventas es tuyo. Las únicas comisiones son las de tu pasarela de pago (Stripe, PayPal, MercadoPago, etc.). Nosotros no cobramos nada adicional.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Funciona para otros tipos de negocio? <span class="faq-chevron">+</span></div><div class="faq-a">Totalmente. El CRM base funciona para cualquier servicio. Coaches de vida, psicólogos, nutricionistas, academias, estudios de yoga y más ya lo usan.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si necesito ayuda con la instalación? <span class="faq-chevron">+</span></div><div class="faq-a">El plan SaaS y el plan Código + SaaS incluyen soporte completo. El plan Código Solo incluye soporte por email por 30 días para resolver cualquier duda durante la instalación.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo usar mi propio dominio? <span class="faq-chevron">+</span></div><div class="faq-a">Sí. Con el plan Código Solo puedes conectar tu dominio en Vercel gratis. Con el plan SaaS y Código + SaaS nosotros lo configuramos por ti.</div></div>
     </div>
   </div>
 </section>
@@ -492,7 +492,7 @@ footer { background:var(--ink); color:#ffffffcc; padding:60px 40px 40px; }
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ═══════════════════════════════════════════════════════════════
 // ⚠️  SOLO CAMBIA ESTAS 2 LÍNEAS
 // ═══════════════════════════════════════════════════════════════
@@ -553,8 +553,8 @@ function initPayPal() {
 }
 
 // Modal
-const planNames  = { saas:'SaaS Mensual', codigo:'Código Solo', premium:'Código + SaaS', // legacy: starter:'Starter', pro:'Pro', elite:'Elite' };
-const planPrices = { starter:'$97', pro:'$197', elite:'$397' };
+const planNames  = { saas:'SaaS Mensual', codigo:'Código Solo', premium:'Código + SaaS', starter:'Starter', pro:'Pro', elite:'Elite' };
+const planPrices = { saas:'$59/mes', codigo:'$397', premium:'$597', starter:'$97', pro:'$197', elite:'$397' };
 let currentPlan  = { id:'pro', name:'Pro', price:197 };
 
 function openModal(planId, price) {
@@ -584,7 +584,7 @@ function switchTab(tab) {
 
 // Stripe payment
 async function handleStripePayment() {
-  if (!stripe || !cardElement) { alert('⚠️ Agrega tu Stripe Publishable Key para activar esta función.'); return; }
+  if (!stripe || !cardElement) { window.open('https://buy.stripe.com/3cIaEY6p3f2O2ZwcIz3Je05','_blank'); return; }
   const name  = document.getElementById('card-name').value.trim();
   const email = document.getElementById('card-email').value.trim();
   if (!name || !email) { document.getElementById('stripe-error').textContent = 'Por favor completa nombre y email.'; return; }
@@ -651,21 +651,12 @@ function showSuccess() {
 }
 
 // FAQ accordion
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-q').addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
-
-  // Scroll animations
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fadeIn ease .6s both'; } });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  });
-});
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
