@@ -651,18 +651,20 @@ function showSuccess() {
 }
 
 // FAQ accordion
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-q').addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
   });
-});
 
-// Scroll animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fadeIn ease .6s both'; } });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.animation = 'fadeIn ease .6s both'; } });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  });
 });
 </script>
 </body>
